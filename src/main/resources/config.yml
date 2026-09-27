@@ -1,0 +1,102 @@
+# Crystal-DeviceBan 1.1.1
+#
+# IMPORTANT:
+# A vanilla Minecraft server does not receive a real hardware ID.
+# The default fingerprint is SHA-256(IP). This is NOT a true HWID.
+#
+# Every message below is editable. You can use either a single string or a YAML list.
+# Colors use the legacy & codes: &a, &c, &l, &n, etc.
+#
+# Available placeholders:
+# {prefix} {player} {reason} {admin} {fingerprint} {duration} {expires}
+
+fingerprint:
+  include-ip: true
+
+settings:
+  # If true, a player's latest device is remembered by their name.
+  # This allows /deviceunban <player> and /deviceunmute <player>.
+  remember-last-device: true
+
+messages:
+  prefix: "&8[&bCrystal-DeviceBan&8] "
+
+  ban-screen:
+    - "&8&m----------------------------------------"
+    - "&c&lДОСТУП ЗАПРЕЩЁН"
+    - "&7"
+    - "&fИгрок: &e{player}"
+    - "&fПричина: &e{reason}"
+    - "&fАдминистратор: &e{admin}"
+    - "&7"
+    - "&8Fingerprint: {fingerprint}"
+    - "&8&m----------------------------------------"
+
+  mute:
+    player: "{prefix}&cВы получили мут."
+    details:
+      - "&7Причина: &f{reason}"
+      - "&7Срок: &f{duration}"
+      - "&7Истекает: &f{expires}"
+
+  ban:
+    usage: "{prefix}&cИспользование: /deviceban <игрок> [причина]"
+    player-not-found: "{prefix}&cИгрок &f{player} &cне найден или не подключён."
+    address-error: "{prefix}&cНе удалось определить устройство игрока."
+    success:
+      - "{prefix}&aИгрок &f{player} &aзаблокирован."
+      - "{prefix}&7Fingerprint: &f{fingerprint}"
+      - "{prefix}&7Причина: &f{reason}"
+    already-banned: "{prefix}&eЭто устройство уже заблокировано."
+
+  unban:
+    usage: "{prefix}&cИспользование: /deviceunban <игрок|fingerprint>"
+    not-found: "{prefix}&cБлокировка для &f{player} &cне найдена."
+    success:
+      - "{prefix}&aУстройство игрока &f{player} &aразблокировано."
+      - "{prefix}&7Fingerprint: &f{fingerprint}"
+
+  mute-command:
+    usage: "{prefix}&cИспользование: /devicemute <игрок> [срок] [причина]"
+    player-not-found: "{prefix}&cИгрок &f{player} &cне найден или не подключён."
+    address-error: "{prefix}&cНе удалось определить устройство игрока."
+    invalid-duration: "{prefix}&cНеверный срок. Примеры: 10m, 2h, 7d, permanent."
+    success:
+      - "{prefix}&aУстройство игрока &f{player} &aзамьючено."
+      - "{prefix}&7Срок: &f{duration}"
+      - "{prefix}&7Причина: &f{reason}"
+    already-muted: "{prefix}&eЭто устройство уже замьючено."
+
+  unmute:
+    usage: "{prefix}&cИспользование: /deviceunmute <игрок|fingerprint>"
+    not-found: "{prefix}&cМут для &f{player} &cне найден."
+    success:
+      - "{prefix}&aМут устройства игрока &f{player} &aснят."
+
+  mute-chat:
+    - "{prefix}&cВы не можете писать в чат."
+    - "&7Причина: &f{reason}"
+    - "&7Истекает: &f{expires}"
+
+  info:
+    usage: "{prefix}&cИспользование: /deviceinfo [игрок]"
+    player-not-found: "{prefix}&cИгрок не найден или не подключён."
+    result:
+      - "{prefix}&7Игрок: &f{player}"
+      - "{prefix}&7Fingerprint: &f{fingerprint}"
+      - "{prefix}&7Ban: {ban-status}"
+      - "{prefix}&7Mute: {mute-status}"
+
+  reload:
+    success: "{prefix}&aКонфигурация перезагружена."
+
+  errors:
+    no-permission: "{prefix}&cУ вас нет прав."
+    console-player-required: "{prefix}&cЭту команду нужно выполнить от имени игрока."
+    player-offline: "{prefix}&cИгрок должен быть онлайн."
+
+  status:
+    banned: "&cЗАБЛОКИРОВАН"
+    not-banned: "&aНЕ ЗАБЛОКИРОВАН"
+    muted: "&cЗАМЬЮЧЕН"
+    not-muted: "&aНЕ ЗАМЬЮЧЕН"

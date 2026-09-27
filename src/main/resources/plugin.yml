@@ -1,0 +1,51 @@
+name: Crystal-DeviceBan
+version: 1.1.2
+main: ru.crystaldeviceban.CrystalDeviceBanPlugin
+api-version: '1.21'
+author: Crystal
+description: Configurable connection fingerprint bans and mutes for Purpur 1.21.11.
+
+commands:
+  deviceban:
+    description: Ban a player's current device connection.
+    usage: /deviceban <player> [reason...]
+    permission: crystaldeviceban.ban
+
+  deviceunban:
+    description: Unban a player's latest recorded device connection or a fingerprint.
+    usage: /deviceunban <player|fingerprint>
+    permission: crystaldeviceban.unban
+
+  devicemute:
+    description: Mute a player's current device connection.
+    usage: /devicemute <player> [duration] [reason...]
+    permission: crystaldeviceban.mute
+
+  deviceunmute:
+    description: Unmute a player's latest recorded device connection or a fingerprint.
+    usage: /deviceunmute <player|fingerprint>
+    permission: crystaldeviceban.unmute
+
+  deviceinfo:
+    description: Show a player's current device fingerprint.
+    usage: /deviceinfo [player]
+    permission: crystaldeviceban.info
+
+  devicebanreload:
+    description: Reload Crystal-DeviceBan configuration.
+    usage: /devicebanreload
+    permission: crystaldeviceban.reload
+
+permissions:
+  crystaldeviceban.ban:
+    default: op
+  crystaldeviceban.unban:
+    default: op
+  crystaldeviceban.mute:
+    default: op
+  crystaldeviceban.unmute:
+    default: op
+  crystaldeviceban.info:
+    default: op
+  crystaldeviceban.reload:
+    default: op
